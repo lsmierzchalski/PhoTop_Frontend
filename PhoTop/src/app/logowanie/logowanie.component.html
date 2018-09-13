@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="loguj">
+        <h1> Zaloguj</h1>
+    </div>
+
+    <div>
+        <h4> Nie posiadasz konta?
+            <button class="btn btn-dark" type="search">
+                <a routerLink="/rejestracja">Zarejestruj sie </a>
+            </button>
+        </h4>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+            <h4>Zaloguj uzywajac konta PhoTop</h4>
+
+
+            <div id="panel">
+                <form (ngSubmit)="login(formData)" #formData="ngForm">
+
+                    <label for="email">E-mail:</label>
+                    <input ngModel type="email" id="email" name="email" required>
+
+                    <label for="password">Hasło:</label>
+                    <input ngModel type="password" id="password" name="password" required>
+
+                    <div id="lower">
+                        <input type="checkbox">
+                        <label class="check" for="checkbox">Zapamiętaj mnie! </label>
+                        <input class="btn btn-dark" type="submit" [disabled]="formData.invalid" value="Login">
+                        <p>
+                            <a id="zmiana" routerLink="/zmiana-h">Zapomniałeś hasła?</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6" align="center">
+            <h4>Zaloguj uzywajac konta spolecznosciowego</h4>
+
+
+            <div id="log">
+
+                <button class="btn btn-primary fb">
+                    <i class="fab fa-facebook fa-9x"></i>
+
+                </button>
+            </div>
+            <div id="log">
+                <button class="btn btn-danger goo">
+                    <i class="fab fa-google-plus-square fa-9x"></i>
+
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

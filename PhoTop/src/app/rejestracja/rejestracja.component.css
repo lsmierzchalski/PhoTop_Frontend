@@ -1,0 +1,52 @@
+.rejestruj
+{
+    text-align: center;
+    margin-bottom: 85px;
+    margin-top: 30px;
+}
+
+.clas
+{
+    background-color: black;
+    margin: auto;
+    border: 10px;
+    border-radius: 45px;
+    padding: 15px 0 0;
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+.konten
+{
+    text-align: center;
+}
+
+.napis
+{
+    width: 260px;
+    color: white;
+    font-size: 30px;
+    text-shadow: 0 0 1px white;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.pole
+{
+    width: 360px; 
+    margin: 0 auto;
+    padding: 10px 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 22px;
+}
+.check
+{
+    color: white;
+    padding-bottom: 15px;
+}
+.zapisz
+{
+    width: 250px;
+    background-color: white;
+    color: black;
+}
