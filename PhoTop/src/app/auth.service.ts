@@ -8,14 +8,11 @@ export class AuthService {
   constructor() { }
 
   login(email: string, password: string) {
-    console.log(email);
-    console.log(password);
+    console.log(email, password);
   }
 
   signup(pseudonim: string, email: string, password: string) {
-    console.log(pseudonim);
-    console.log(email);
-    console.log(password);
+    console.log(pseudonim, email, password);
   }
 
   logout() { }
