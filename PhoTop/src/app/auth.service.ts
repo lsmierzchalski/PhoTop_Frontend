@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '../../node_modules/@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   login(email: string, password: string) {
-    console.log(email, password);
+    console.log('logowanie', email, password);
+    if (email === 'a' && password === 'a') {
+      this.router.navigate(['glowna']);
+    }
   }
 
   signup(pseudonim: string, email: string, password: string) {

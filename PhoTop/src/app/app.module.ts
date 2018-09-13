@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { RejestracjaComponent } from './rejestracja/rejestracja.component';
 import { EditPrifileComponent } from './edit-prifile/edit-prifile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { HomeUserPageComponent } from './home-user-page/home-user-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppRoutingModule } from './app.routing.module';
@@ -18,6 +19,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -28,13 +32,15 @@ import { HomeComponent } from './home/home.component';
     EditPrifileComponent,
     ChangePasswordComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    HomeUserPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv'}),
   ],
   exports: [
   ],
