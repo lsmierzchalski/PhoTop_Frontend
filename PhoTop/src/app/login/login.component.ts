@@ -3,11 +3,11 @@ import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-logowanie',
-  templateUrl: './logowanie.component.html',
-  styleUrls: ['./logowanie.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class LogowanieComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
