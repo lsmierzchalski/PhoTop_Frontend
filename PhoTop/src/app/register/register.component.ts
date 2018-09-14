@@ -3,14 +3,14 @@ import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-rejestracja',
-  templateUrl: './rejestracja.component.html',
-  styleUrls: ['./rejestracja.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class RejestracjaComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
   }

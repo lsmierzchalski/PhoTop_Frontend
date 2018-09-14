@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { RejestracjaComponent } from './rejestracja/rejestracja.component';
+import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { EditPrifileComponent } from './edit-prifile/edit-prifile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -12,7 +12,7 @@ const routes: Routes = [
 
     { path: '', redirectTo: '/glowna', pathMatch: 'full' },
     { path: 'logowanie', component: LoginComponent },
-    { path: 'rejestracja', component: RejestracjaComponent },
+    { path: 'rejestracja', component: RegisterComponent },
     { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'edycja', component: EditPrifileComponent },
     { path: 'glowna', component: HomeComponent },
