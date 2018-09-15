@@ -19,7 +19,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 // find if any user matches login credentials
                 const filteredUsers = users.filter(user => {
-                    return user.username === request.body.username && user.password === request.body.password;
+                    return user.login === request.body.login && user.password === request.body.password;
                 });
 
                 if (filteredUsers.length) {
@@ -27,7 +27,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     const user = filteredUsers[0];
                     const body = {
                         id: user.id,
-                        username: user.username,
+                        login: user.login,
                         email: user.email,
                         avatar: user.avatar,
                         description: user.description,
@@ -37,7 +37,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: body }));
                 } else {
                     // else return 400 bad request
-                    return throwError({ error: { message: 'Username or password is incorrect' } });
+                    return throwError({ error: { message: 'Login lub hasło jest niepoprawny' } });
                 }
             }
 
@@ -81,18 +81,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/users/register') && request.method === 'POST') {
                 // get new user object from post body
                 const newUser = request.body;
-
                 // validation
-                const duplicateUser = users.filter(user => user.username === newUser.username).length;
+                const duplicateUser = users.filter(user => user.login === newUser.login).length;
                 if (duplicateUser) {
-                    return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
+                    return throwError({ error: { message: 'Nazwa użytkownika "' + newUser.login + '" jest już zajęta' } });
                 }
 
                 // save new user
                 newUser.id = users.length + 1;
                 users.push(newUser);
                 localStorage.setItem('users', JSON.stringify(users));
-
+                
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
             }

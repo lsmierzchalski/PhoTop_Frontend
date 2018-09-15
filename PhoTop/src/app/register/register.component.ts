@@ -1,22 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
+import { AlertService } from '../_services/alert.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
-})
+    templateUrl: 'register.component.html',
+    styleUrls: ['./register.component.css']})
 export class RegisterComponent implements OnInit {
+    registerForm: FormGroup;
+    loading = false;
+    submitted = false;
 
-  constructor(private authService: AuthService) {
-  }
+    constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private userService: UserService,
+        private alertService: AlertService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.registerForm = this.formBuilder.group({
+            login: ['', Validators.required],
+            email: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            avatar: ['default_avatar'],
+            description: ['Brak opisu.'],
+        });
+    }
 
-  signup(formData: NgForm) {
-    this.authService.signup(formData.value.pseudonim, formData.value.email, formData.value.password);
-  }
+    // convenience getter for easy access to form fields
+    get f() { return this.registerForm.controls; }
 
+    onSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
+        this.userService.register(this.registerForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.alertService.success('Rejestracja powiodał się', true);
+                    this.router.navigate(['/logowanie']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
 }

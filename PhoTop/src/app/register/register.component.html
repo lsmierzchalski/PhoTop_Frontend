@@ -1,38 +1,44 @@
-<div class="container">
-
-  <div class="rejestruj">
+<div class="col-sm-10 offset-sm-1">
+<app-alert></app-alert>
+<div class="rejestruj">
     <h1> Rejestracja </h1>
-  </div>
-  <div class="clas">
-    <div class="container konten">
-      <form (ngSubmit)="signup(formData)" #formData="ngForm">
+</div>
+<div class="clas">
+<div class="container konten">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="login">Nazwa użytkownika</label>
+                <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                    <div *ngIf="f.login.errors.required">Nazwa użytkownika jest wymagane</div>
+                </div>
+            </div>
         <div class="form-group">
-          <label class="napis">Twoj pseudonim:</label>
-          <input ngModel class="pole" type="pseudonim" name="pseudonim">
+            <label for="email">E-mail</label>
+            <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">E-mail jest wymagany</div>
+                <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
+            </div>
         </div>
-
         <div class="form-group">
-          <label class="napis">E-mail:</label>
-          <input ngModel class="pole" type="emial" name="email">
+            <label for="password">Hasło</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
+                <div *ngIf="f.password.errors.minlength">Hasło musi mieć co najmniej 6 znaków</div>
+            </div>
         </div>
-
+        <div class="form-group ">
+            <label class="check col-sm-9" for="checkbox">Zapoznalem sie i akceptujeng regulamin serwisu PhoTop </label>
+            <input class="col-sm-1" type="checkbox" style="margin: 20px">
+        </div>
         <div class="form-group">
-          <label class="napis" for="password">Hasło:</label>
-          <input ngModel class="pole" type="password" id="password" name="password">
+            <button [disabled]="loading" class="btn btn-dark">Załóż konto</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a [routerLink]="['/logowanie']" class="btn btn-link" style="color: #dbdbdb">Zaloguj się</a>
         </div>
-
-        <div class="form-group">
-          <label class="napis" for="password">Powtorz hasło:</label>
-          <input ngModel class="pole" type="password1" id="password1" name="password1">
-        </div>
-
-        <div id="lower">
-          <label class="check" for="checkbox">Zapoznalem sie i akceptujeng regulamin serwisu PhoTop </label>
-          <input type="checkbox" style="margin-left: 5px">
-          <br>
-          <input class="btn btn-dark zapisz" type="submit" value="Zaloz konto">
-        </div>
-      </form>
-    </div>
-  </div>
+    </form>
+</div>
+</div>
 </div>

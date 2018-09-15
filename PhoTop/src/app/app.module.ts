@@ -3,9 +3,11 @@ import { platformBrowser } from '@angular/platform-browser/public_api';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers/fake-backend';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
@@ -47,6 +49,7 @@ import * as  Cloudinary from 'cloudinary-core';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv'}),
@@ -61,6 +64,9 @@ import * as  Cloudinary from 'cloudinary-core';
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
