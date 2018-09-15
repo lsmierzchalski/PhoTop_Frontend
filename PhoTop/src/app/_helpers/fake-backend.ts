@@ -87,11 +87,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return throwError({ error: { message: 'Nazwa użytkownika "' + newUser.login + '" jest już zajęta' } });
                 }
 
+                const duplicateUser2 = users.filter(user => user.email === newUser.email).length;
+                if (duplicateUser2) {
+                    return throwError({ error: { message: 'Email "' + newUser.email + '" został już użyty' } });
+                }
+
                 // save new user
                 newUser.id = users.length + 1;
                 users.push(newUser);
                 localStorage.setItem('users', JSON.stringify(users));
-                
+
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
             }
