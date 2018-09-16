@@ -17,15 +17,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-                // find if any user matches email credentials
+                // find if any user matches login credentials
                 console.log('sdafasdf');
                 const filteredUsers = users.filter(user => {
-                    return user.email === request.body.email && user.password === request.body.password;
+                    return user.login === request.body.login && user.password === request.body.password;
                 });
                 console.log(users);
                 console.log(filteredUsers);
                 if (filteredUsers.length) {
-                    // if email details are valid return 200 OK with user details and fake jwt token
+                    // if login details are valid return 200 OK with user details and fake jwt token
                     const user = filteredUsers[0];
                     const body = {
                         id: user.id,
@@ -39,7 +39,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: body }));
                 } else {
                     // else return 400 bad request
-                    return throwError({ error: { message: 'Email lub hasło jest niepoprawny' } });
+                    return throwError({ error: { message: 'Login lub hasło jest niepoprawny' } });
                 }
             }
 

@@ -20,11 +20,10 @@
             <div id="panel">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label for="username">E-mail</label>
-                        <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Nazwa użytkownika jest wymagana</div>
-                            <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
+                        <label for="username">Login</label>
+                        <input type="text" formControlName="login" class="form-control"[ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                        <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                            <div *ngIf="f.login.errors.required">Login jest wymagany</div>
                         </div>
                     </div>
                     <div class="form-group">
