@@ -1,4 +1,5 @@
 <div class="container">
+    <app-alert></app-alert>
     <div class="loguj">
         <h1> Zaloguj</h1>
     </div>
@@ -16,33 +17,35 @@
         <div class="col-lg-6">
             <h4>Zaloguj uzywajac konta PhoTop</h4>
 
-
             <div id="panel">
-                <form (ngSubmit)="login(formData)" #formData="ngForm">
-
-                    <label for="email">E-mail:</label>
-                    <input ngModel type="email" id="email" name="email" required>
-
-                    <label for="password">Hasło:</label>
-                    <input ngModel type="password" id="password" name="password" required>
-
-                    <div id="lower">
-                        <input type="checkbox">
-                        <label class="check" for="checkbox">Zapamiętaj mnie! </label>
-                        <input class="btn btn-dark" type="submit" [disabled]="formData.invalid" value="Login">
-                        <p>
-                            <a id="zmiana" routerLink="/zmiana-h">Zapomniałeś hasła?</a>
-                        </p>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="username">E-mail</label>
+                        <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Nazwa użytkownika jest wymagana</div>
+                            <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Haslo</label>
+                        <input type="password" formControlName="password"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
+                        </div>
+                        <a id="zmiana" routerLink="/zmiana-h">Zapomniałeś hasła?</a>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-dark">Zaloguj</button>
+                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     </div>
                 </form>
             </div>
 
         </div>
 
-
         <div class="col-lg-6" align="center">
             <h4>Zaloguj uzywajac konta spolecznosciowego</h4>
-
 
             <div id="log">
 
