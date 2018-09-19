@@ -1,18 +1,19 @@
+<app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-center">
-                <cl-image public-id="avatar-x" format="jpg" class="img-fluid" style="border-radius: 50%;">
+                <cl-image public-id="{{currentUser.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
                     <cl-transformation width="400" height="400" gravity="faces" crop="fill">
                     </cl-transformation>
                 </cl-image>
                 <button class="btn btn-dark" style="margin: 10px;">Zmień avatar</button>
             </div>
             <div class="col-md-9">
-                <h1>Login</h1>
-                <p>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. </p>
+                <h1>{{currentUser.login}}</h1>
+                <p>{{currentUser.description}}</p>
                 <button class="btn btn-dark" style="margin: 10px;">Zmień opis</button>
-                <button class="btn btn-dark" style="margin: 10px;">Zmień hasło</button>
+                <!-- <button class="btn btn-dark" style="margin: 10px;" routerLink="/zmiana-h">Zmień hasło</button> -->
             </div>
         </div>
         <div class="row">

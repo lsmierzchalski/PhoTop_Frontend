@@ -10,17 +10,16 @@ import { HomeUserPageComponent } from './home-user-page/home-user-page.component
 
 const routes: Routes = [
 
-    { path: '', redirectTo: '/glowna', pathMatch: 'full' },
+    { path: '', redirectTo: '/strona-domowa', pathMatch: 'full' },
     { path: 'logowanie', component: LoginComponent },
     { path: 'rejestracja', component: RegisterComponent },
-    { path: 'zmiana-h', component: ChangePasswordComponent },
+    // { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'edycja', component: EditPrifileComponent },
     { path: 'glowna', component: HomeComponent },
     { path: 'strona-domowa', component: HomeUserPageComponent },
     { path: '**', component: PageNotFoundComponent }
 
 ];
-
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

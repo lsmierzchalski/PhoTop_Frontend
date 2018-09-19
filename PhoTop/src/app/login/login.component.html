@@ -1,23 +1,17 @@
-<div class="container">
-    <app-alert></app-alert>
-    <div class="loguj">
-        <h1> Zaloguj</h1>
-    </div>
-
-    <div>
-        <h4> Nie posiadasz konta?
-            <button class="btn btn-dark" type="search">
-                <a routerLink="/rejestracja">Zarejestruj sie </a>
-            </button>
-        </h4>
-    </div>
-
-    <div class="row">
-
-        <div class="col-lg-6">
-            <h4>Zaloguj uzywajac konta PhoTop</h4>
-
-            <div id="panel">
+<app-nav></app-nav>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <app-alert></app-alert>
+                <div class="loguj">
+                    <h1>Logowanie</h1>
+                </div>
+                <div>
+                    <h4> Nie posiadasz konta?
+                        <button class="btn btn-dark" type="search" [routerLink]="['/rejestracja']">Zarejestruj sie</button>
+                    </h4>
+                </div>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="username">Login</label>
@@ -28,11 +22,10 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Haslo</label>
-                        <input type="password" formControlName="password"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <input type="password" formControlName="password"  class="form-control" [(ngModel)]="checkboxFlag"  />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
                         </div>
-                        <a id="zmiana" routerLink="/zmiana-h">Zapomniałeś hasła?</a>
                     </div>
                     <div class="form-group">
                         <button [disabled]="loading" class="btn btn-dark">Zaloguj</button>
@@ -40,27 +33,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
-        <div class="col-lg-6" align="center">
-            <h4>Zaloguj uzywajac konta spolecznosciowego</h4>
-
-            <div id="log">
-
-                <button class="btn btn-primary fb">
-                    <i class="fab fa-facebook fa-9x"></i>
-
-                </button>
-            </div>
-            <div id="log">
-                <button class="btn btn-danger goo">
-                    <i class="fab fa-google-plus-square fa-9x"></i>
-
-                </button>
-            </div>
-
-        </div>
-
     </div>
 </div>

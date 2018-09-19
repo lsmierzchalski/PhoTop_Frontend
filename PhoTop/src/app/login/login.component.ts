@@ -7,8 +7,7 @@ import { AlertService } from '../_services/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
-  templateUrl: 'login.component.html',
-  styleUrls : ['login.component.css']
+  templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
-
+        console.log(this.returnUrl);
         this.loading = true;
         this.authenticationService.login(this.f.login.value, this.f.password.value)
             .pipe(first())

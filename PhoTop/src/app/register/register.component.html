@@ -1,44 +1,43 @@
-<div class="col-sm-10 offset-sm-1 col-xl-6 offset-xl-3">
-<app-alert></app-alert>
-<div class="rejestruj">
-    <h1> Rejestracja </h1>
-</div>
-<div class="clas">
-<div class="container konten">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="login">Nazwa użytkownika</label>
-                <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
-                <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
-                    <div *ngIf="f.login.errors.required">Nazwa użytkownika jest wymagane</div>
+<app-nav></app-nav>
+<div class="jumbotron">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <app-alert></app-alert>
+            <div class="rejestruj">
+                <h1> Rejestracja </h1>
+            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="login">Nazwa użytkownika</label>
+                    <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                    <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                        <div *ngIf="f.login.errors.required">Nazwa użytkownika jest wymagane</div>
+                    </div>
                 </div>
-            </div>
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">E-mail jest wymagany</div>
-                <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
-            </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">E-mail jest wymagany</div>
+                        <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
+                        <div *ngIf="f.password.errors.minlength">Hasło musi mieć co najmniej 6 znaków</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-dark">Załóż konto</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <a [routerLink]="['/logowanie']" class="btn btn-link" style="color: #292828">Zaloguj się</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="password">Hasło</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
-                <div *ngIf="f.password.errors.minlength">Hasło musi mieć co najmniej 6 znaków</div>
-            </div>
-        </div>
-        <div class="form-group ">
-            <label class="check col-sm-9" for="checkbox">Zapoznalem sie i akceptujeng regulamin serwisu PhoTop </label>
-            <input class="col-sm-1" type="checkbox" style="margin: 20px">
-        </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-dark">Załóż konto</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/logowanie']" class="btn btn-link" style="color: #dbdbdb">Zaloguj się</a>
-        </div>
-    </form>
-</div>
+    </div>
 </div>
 </div>
