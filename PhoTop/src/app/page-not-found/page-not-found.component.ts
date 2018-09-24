@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../_services/http.service';
 
 @Component({
   selector: 'app-page-not-found',

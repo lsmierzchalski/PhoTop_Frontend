@@ -7,7 +7,7 @@ export class Photo {
     file_path: string;
     description: string;
     visibility: string;
-    date_of_addition: Date;
+    dateOfAddition: string;
     rating: number;
     number_of_ratings: number;
 }

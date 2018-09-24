@@ -33,6 +33,8 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+import { RankComponent } from './rank/rank.component';
+import { HttpService } from './_services/http.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import * as  Cloudinary from 'cloudinary-core';
     HomeUserPageComponent,
     AlertComponent,
     NavbarUserComponent,
+    RankComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import * as  Cloudinary from 'cloudinary-core';
     AuthGuard,
     AlertService,
     AuthenticationService,
+    HttpService,
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

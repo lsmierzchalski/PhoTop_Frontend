@@ -18,7 +18,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 // find if any user matches login credentials
-                console.log('sdafasdf');
                 const filteredUsers = users.filter(user => {
                     return user.login === request.body.login && user.password === request.body.password;
                 });

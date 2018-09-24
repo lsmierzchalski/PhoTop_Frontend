@@ -7,17 +7,19 @@ import { EditPrifileComponent } from './edit-prifile/edit-prifile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { HomeUserPageComponent } from './home-user-page/home-user-page.component';
+import { RankComponent } from './rank/rank.component';
 
 const routes: Routes = [
 
     { path: '', redirectTo: '/strona-domowa', pathMatch: 'full' },
     { path: 'logowanie', component: LoginComponent },
     { path: 'rejestracja', component: RegisterComponent },
+    { path: 'ranking', component: RankComponent },
     // { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'edycja', component: EditPrifileComponent },
     { path: 'glowna', component: HomeComponent },
     { path: 'strona-domowa', component: HomeUserPageComponent },
-    { path: '**', component: PageNotFoundComponent }
+    { path: '**', component: PageNotFoundComponent },
 
 ];
 
