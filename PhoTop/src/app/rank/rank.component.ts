@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../_services/http.service';
 import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { Photo } from '../_models/photo';
 
 @Component({
     selector: 'app-rank',
@@ -8,22 +9,18 @@ import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 })
 export class RankComponent implements OnInit {
 
+    photos: Photo[] = [];
+
     constructor(private httpSerive: HttpService) {
     }
 
     ngOnInit() {
-        console.log('start');
-        this.httpSerive.getPhotos().subscribe(post => {
-            console.log(post);
-          });
+        this.loadAllPhotos();
+    }
 
-          this.httpSerive.getPhoto().subscribe(post => {
-            console.log(post);
-          });
-
-          this.httpSerive.getPost().subscribe(post => {
-            console.log(post);
-          });
-        console.log('stop');
+    private loadAllPhotos() {
+        this.httpSerive.getPhotos().subscribe(photos => {
+            this.photos = photos;
+        });
     }
 }

@@ -36,6 +36,8 @@ import * as  Cloudinary from 'cloudinary-core';
 import { RankComponent } from './rank/rank.component';
 import { HttpService } from './_services/http.service';
 
+import {NgbModule, NgbRating} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import { HttpService } from './_services/http.service';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv'}),
   ],
   exports: [

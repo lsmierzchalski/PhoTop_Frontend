@@ -13,21 +13,22 @@
         <a class="nav-item nav-link active" [routerLink]="['/ranking']" >Ranking <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" >Features</a>
         <a class="nav-item nav-link" >Pricing</a>
-        <a class="nav-item nav-link disabled" >Disabled</a>
     </div>
     <p class="navbar-nav mr-auto"></p>
 
-    <div class="input-group form-inline mr-auto search-div" style="margin: 5px; width: 400px;">
+    <div class="input-group form-inline mr-auto search-div" style="margin: 5px; width: 300px;">
         <input class="form-control" type="search" placeholder="Szukana fraza" aria-label="Search">
         <div class="input-group-append">
             <button class="btn btn btn-dark" type="button" id="inputGroupFileAddon04">Szukaj</button>
         </div>
     </div>
-    <cl-image public-id="{{currentUser.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
-        <cl-transformation width="50" height="50" gravity="faces" crop="fill">
-        </cl-transformation>
-    </cl-image>
-    <h2 class="login_text">{{currentUser.login}}</h2>
-    <button  class="btn btn-dark" [routerLink]="['/logowanie']" style="margin: 5px;">Wyloguj</button>
+    <div class="form-inline" style="min-width: 210px;">
+        <cl-image public-id="{{currentUser.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
+            <cl-transformation width="50" height="50" gravity="faces" crop="fill">
+            </cl-transformation>
+        </cl-image>
+        <h2 class="login_text">{{currentUser.login}}</h2>
+        <button  class="btn btn-dark" [routerLink]="['/logowanie']" style="margin: 5px;">Wyloguj</button>
+    </div>
 </div>
 </nav>
