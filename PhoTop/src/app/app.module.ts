@@ -18,10 +18,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppRoutingModule } from './app.routing';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthService } from './auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarUserComponent } from './navbar-user/navbar-user.component';
+import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-page.component';
 
 import { AlertComponent } from './_directives/alert.component';
 import { AlertService } from './_services/alert.service';
@@ -36,7 +36,7 @@ import * as  Cloudinary from 'cloudinary-core';
 import { RankComponent } from './rank/rank.component';
 import { HttpService } from './_services/http.service';
 
-import {NgbModule, NgbRating} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -52,6 +52,7 @@ import {NgbModule, NgbRating} from '@ng-bootstrap/ng-bootstrap';
     AlertComponent,
     NavbarUserComponent,
     RankComponent,
+    SearchByDatePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,6 @@ import {NgbModule, NgbRating} from '@ng-bootstrap/ng-bootstrap';
   exports: [
   ],
   providers: [
-    AuthService,
     AuthGuard,
     AlertService,
     AuthenticationService,

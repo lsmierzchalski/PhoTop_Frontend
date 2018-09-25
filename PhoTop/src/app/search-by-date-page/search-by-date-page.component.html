@@ -1,0 +1,55 @@
+<app-navbar-user></app-navbar-user>
+<div class="jumbotron">
+    <div class="component">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <h1>Szukaj według daty</h1>
+                <p>Wrowadż zakres daty według ktrego chcesz szukać</p>
+                <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+                </ngb-datepicker>
+    
+                <ng-template #t let-date="date" let-focused="focused">
+                <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                </span>
+                </ng-template>
+                <hr>
+            </div>
+        </div>
+        <div class="row" *ngIf="photos.length == 0">
+            <div class="alert alert-secondary col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3" role="alert">
+                Brak wyników
+            </div>
+        </div>
+        <div *ngFor="let photo of photos">
+            <div class="row" >
+                <div class="col-md-7">
+                    <a >
+                        <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
+                            <cl-transformation width="700" height="300" gravity="faces" crop="fill">
+                            </cl-transformation>
+                        </cl-image>
+                    </a>
+                </div>
+                <div class="col-md-5">
+                    <h3>{{photo.title}}</h3>
+                    <p>{{photo.description}}</p>
+                    <h2>★ {{photo.rating}} &nbsp;&nbsp;&nbsp;<small><small>{{photo.number_of_ratings}} ocen</small></small></h2>
+                    <a class="btn btn-dark" style="color: white;">Zobacz więcej</a>
+                    <ngb-rating [(rate)]="photo.currentRate">
+                        <span>&#9733;</span>
+                    </ngb-rating>
+                    <hr>
+                    <pre>Rate: <b>{{photo.currentRate}}</b></pre>
+                </div>
+            </div>
+            <!-- /.row -->
+            <hr>
+        </div>
+    </div>
+</div>
