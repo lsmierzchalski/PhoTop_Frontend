@@ -14,7 +14,8 @@ export class User {
     ban_to_rate: boolean;
     ban_account: boolean;
     moderator: boolean;
-    date_created_on: Date;
-    date_last_login: Date;
-    ip_address_last_login: Date;
+    date_created_on: string;
+    date_last_login: string;
+    ip_address_last_login: string;
+    token: string;
 }

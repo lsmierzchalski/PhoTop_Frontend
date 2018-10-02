@@ -9,21 +9,28 @@
             </div>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="login">Nazwa użytkownika</label>
+                    <label for="login">Login</label>
                     <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
                     <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
-                        <div *ngIf="f.login.errors.required">Nazwa użytkownika jest wymagane</div>
+                        <div *ngIf="f.login.errors.required">Login jest wymagane</div>
+                        <div *ngIf="f.login.errors.minlength">Login musi mieć co najmniej 3 znaków</div>
                     </div>
-                </div>
-                <div class="form-group">
+                    <label for="name">Imię</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Imię jest wymagane</div>
+                    </div>
+                    <label for="surname">Nazwisko</label>
+                    <input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
+                    <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+                        <div *ngIf="f.surname.errors.required">Nazwisko jest wymagane</div>
+                    </div>
                     <label for="email">E-mail</label>
                     <input type="email" formControlName="email" class="form-control" ngModel email [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">E-mail jest wymagany</div>
                         <div *ngIf="f.email.errors.email">E-mail jest niepoprawny</div>
                     </div>
-                </div>
-                <div class="form-group">
                     <label for="password">Hasło</label>
                     <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">

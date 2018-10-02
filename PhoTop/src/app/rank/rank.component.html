@@ -1,13 +1,14 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="my-4">Ranking wszechczasów <small>Photop</small></h1>
+        <h1 class="my-4">Ranking <small>Photop</small></h1>
         
         <!-- Project One -->
-        <div *ngFor="let photo of photos">
+        <div *ngFor="let photo of photos; let i = index" [attr.data-index]="i">
             <div class="row" >
                 <div class="col-md-7">
-                    <a >
+                    <h2>Miejsce {{i+1}}</h2>
+                    <a>
                         <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
                             <cl-transformation width="700" height="300" gravity="faces" crop="fill">
                             </cl-transformation>
@@ -17,13 +18,14 @@
                 <div class="col-md-5">
                     <h3>{{photo.title}}</h3>
                     <p>{{photo.description}}</p>
-                    <h2>★ {{photo.rating}} &nbsp;&nbsp;&nbsp;<small><small>{{photo.number_of_ratings}} ocen</small></small></h2>
+                    <h2>★ {{photo.rating}} &nbsp;&nbsp;&nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
                     <a class="btn btn-dark" style="color: white;">Zobacz więcej</a>
-                    <ngb-rating [(rate)]="photo.currentRate">
-                        <span>&#9733;</span>
-                    </ngb-rating>
-                    <hr>
-                    <pre>Rate: <b>{{photo.currentRate}}</b></pre>
+                    <p>
+                            <ngb-rating [(rate)]="photo.currentRate">
+                                   <h1>&#9733;</h1>
+                                </ngb-rating>
+                    </p>
+
                 </div>
             </div>
             <!-- /.row -->

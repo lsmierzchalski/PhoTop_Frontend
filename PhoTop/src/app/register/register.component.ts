@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService } from '../_services/alert.service';
-import { UserService } from '../_services/user.service';
+import { HttpService } from '../_services/http.service';
 
 @Component({
     templateUrl: 'register.component.html'
@@ -17,16 +17,16 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private userService: UserService,
+        private httpService: HttpService,
         private alertService: AlertService) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            login: ['', Validators.required],
+            login: ['', [Validators.required, Validators.minLength(3)]],
+            name: ['', Validators.required],
+            surname: ['', Validators.required],
             email: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            avatar: ['default_avatar'],
-            description: ['Brak opisu.']
+            password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
 
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
+        this.httpService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/logowanie']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Login lub email został już wykorzystany.');
                     this.loading = false;
                 });
     }

@@ -10,9 +10,9 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
     <div class="navbar-nav">
-        <a class="nav-item nav-link active" [routerLink]="['/ranking']" >Ranking <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" [routerLink]="['/ranking']" >Ranking</a>
         <a class="nav-item nav-link" [routerLink]="['/szukaj-wedlug-daty']" >Szukaj według daty</a>
-        <a class="nav-item nav-link" >Pricing</a>
+        <a class="nav-item nav-link" [routerLink]="['/strona-domowa']">Profil</a>
     </div>
     <p class="navbar-nav mr-auto"></p>
 
@@ -23,10 +23,10 @@
         </div>
     </div>
     <div class="form-inline" style="min-width: 210px;">
-        <cl-image public-id="{{currentUser.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
+        <!-- <cl-image public-id="{{currentUser.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
             <cl-transformation width="50" height="50" gravity="faces" crop="fill">
             </cl-transformation>
-        </cl-image>
+        </cl-image> -->
         <h2 class="login_text">{{currentUser.login}}</h2>
         <button  class="btn btn-dark" [routerLink]="['/logowanie']" style="margin: 5px;">Wyloguj</button>
     </div>

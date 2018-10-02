@@ -26,6 +26,7 @@
     "cloudinary-core": "^2.5.0",
     "core-js": "^2.5.4",
     "jquery": "^1.9.1",
+    "jwt-decode": "^2.2.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
