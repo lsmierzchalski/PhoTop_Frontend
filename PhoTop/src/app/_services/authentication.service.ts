@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Observable } from '../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../_models/user';
 

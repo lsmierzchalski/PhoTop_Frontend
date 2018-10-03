@@ -70,4 +70,9 @@ export class HttpService {
         // tslint:disable-next-line:max-line-length
         return this.http.post<any>(url, { title: title, file_path: file_path, description: description});
     }
+
+    getUserPhotos(user_id: number): Observable<Photo[]> {
+        const url: string = environment.photopApiUrl + 'photos/' + user_id;
+        return this.http.get<Photo[]>(url);
+    }
 }

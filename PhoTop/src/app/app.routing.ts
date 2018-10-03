@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { EditPrifileComponent } from './edit-prifile/edit-prifile.component';
+import { EditPrifileComponent } from './edit-profile/edit-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { HomeUserPageComponent } from './home-user-page/home-user-page.component';
@@ -19,8 +19,8 @@ const routes: Routes = [
     { path: 'ranking', component: RankComponent },
     { path: 'szukaj-wedlug-daty', component: SearchByDatePageComponent },
     { path: 'dodaj-zdjecie', component: AddPhotoPageComponent },
+    { path: 'edycja-profilu', component: EditPrifileComponent },
     // { path: 'zmiana-h', component: ChangePasswordComponent },
-    { path: 'edycja', component: EditPrifileComponent },
     { path: 'glowna', component: HomeComponent },
     { path: 'strona-domowa', component: HomeUserPageComponent },
     { path: '**', component: PageNotFoundComponent },

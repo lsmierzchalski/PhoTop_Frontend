@@ -12,6 +12,7 @@ import { Photo } from '../_models/photo';
 export class HomeUserPageComponent implements OnInit {
 
     user: User2;
+    userPhotos: Photo[];
 
     constructor(private httpService: HttpService) {
     }
@@ -23,7 +24,15 @@ export class HomeUserPageComponent implements OnInit {
     private loadUserData() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.httpService.getUser(currentUser.user_id).subscribe(data => {
+            console.log(data);
+            if (!data.avatar) {
+                data.avatar = 'default_avatar';
+            }
             this.user = data;
+        });
+
+        this.httpService.getUserPhotos(currentUser.user_id).subscribe(data => {
+            this.userPhotos = data;
         });
     }
 }

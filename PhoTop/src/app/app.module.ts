@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
-import { EditPrifileComponent } from './edit-prifile/edit-prifile.component';
+import { EditPrifileComponent } from './edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { HomeUserPageComponent } from './home-user-page/home-user-page.component';
 import { RouterModule, Routes } from '@angular/router';

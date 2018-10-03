@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable} from '@angular/core';
 import {NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerI18n, NgbCalendarPersian} from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpService } from '../_services/http.service';
-import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Photo } from '../_models/photo';
 
 const WEEKDAYS_SHORT = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'];

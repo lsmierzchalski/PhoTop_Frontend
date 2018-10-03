@@ -1,64 +1,44 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
-        <div class="row">
+        <div class="row" *ngIf="user">
             <div class="col-md-3 text-center">
-                <cl-image public-id="avatar-x" format="jpg" class="img-fluid" style="border-radius: 50%;">
-                    <cl-transformation width="400" height="400" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-                <!-- <button class="btn btn-dark" style="margin: 10px;">Zmień avatar</button> -->
+                    <cl-image public-id="{{user.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
+                        <cl-transformation width="400" height="400" gravity="faces" crop="fill">
+                        </cl-transformation>
+                    </cl-image>
+                    <!-- <button class="btn btn-dark" style="margin: 10px;">Zmień avatar</button> -->
             </div>
             <div class="col-md-9">
-                <h1>Staszek</h1>
-                <p>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. </p>
-                <!-- <button class="btn btn-dark" style="margin: 10px;">Zmień opis</button> -->
+                <h1>{{user.login}}</h1>
+                <p>{{user.description}}</p>
+                <button class="btn btn-dark" style="margin: 10px;" [routerLink]="['/edycja-profilu']">Edytuj profil</button>
                 <button class="btn btn-dark" style="margin: 10px;" [routerLink]="['/dodaj-zdjecie']">Dodaj zdjęcie</button>
                 <!-- <button class="btn btn-dark" style="margin: 10px;" routerLink="/zmiana-h">Zmień hasło</button> -->
             </div>
         </div>
+        <div style="height: 60px;"></div>
         <div class="row">
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-1" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-2" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-3" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-4" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-5" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-6" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
-            </div>
-            <div class="col-md-6 col-lg-4 userPhoto">
-                <cl-image public-id="photo-7" class="img-fluid" format="jpg">
-                    <cl-transformation width="500" height="300" gravity="faces" crop="fill">
-                    </cl-transformation>
-                </cl-image>
+            <div *ngFor="let photo of userPhotos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+                <div class="card h-100">
+                    <a href="#">
+                        <a>
+                            <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
+                                <cl-transformation width="700" height="400" gravity="faces" crop="fill">
+                                </cl-transformation>
+                            </cl-image>
+                        </a>
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a>{{photo.title}}</a>
+                        </h4>
+                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
+                        <button class="btn btn-dark">Więcej</button>
+                        &nbsp;
+                        <button class="btn btn-dark">Edytuj</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
