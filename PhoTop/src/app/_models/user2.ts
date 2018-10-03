@@ -1,6 +1,6 @@
-export * from './user';
+export * from './user2';
 
-export class User {
+export class User2 {
     user_id: number;
     login: string;
     password: string;
@@ -16,5 +16,4 @@ export class User {
     moderator: string;
     dateCreatedOn: string;
     dateLastLogin: string;
-    token: string;
 }

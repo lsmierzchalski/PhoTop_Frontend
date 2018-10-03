@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeUserPageComponent } from './home-user-page/home-user-page.component';
 import { RankComponent } from './rank/rank.component';
 import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-page.component';
+import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component';
 
 const routes: Routes = [
 
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'rejestracja', component: RegisterComponent },
     { path: 'ranking', component: RankComponent },
     { path: 'szukaj-wedlug-daty', component: SearchByDatePageComponent },
+    { path: 'dodaj-zdjecie', component: AddPhotoPageComponent },
     // { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'edycja', component: EditPrifileComponent },
     { path: 'glowna', component: HomeComponent },

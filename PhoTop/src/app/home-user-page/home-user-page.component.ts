@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
+import { User2 } from '../_models/user2';
+import { HttpService } from '../_services/http.service';
+import { Photo } from '../_models/photo';
 
 @Component({
     selector: 'app-home-user-page',
@@ -10,12 +11,19 @@ import { UserService } from '../_services/user.service';
 })
 export class HomeUserPageComponent implements OnInit {
 
-    currentUser: User;
+    user: User2;
 
-    constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    constructor(private httpService: HttpService) {
     }
 
     ngOnInit() {
+        this.loadUserData();
+    }
+
+    private loadUserData() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.httpService.getUser(currentUser.user_id).subscribe(data => {
+            this.user = data;
+        });
     }
 }

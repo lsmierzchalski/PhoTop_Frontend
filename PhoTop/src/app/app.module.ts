@@ -3,9 +3,6 @@ import { platformBrowser } from '@angular/platform-browser/public_api';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers/fake-backend';
-
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
@@ -22,12 +19,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarUserComponent } from './navbar-user/navbar-user.component';
 import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-page.component';
+import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component';
 
 import { AlertComponent } from './_directives/alert.component';
 import { AlertService } from './_services/alert.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
-import { UserService } from './_services/user.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 
@@ -35,7 +32,7 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import { RankComponent } from './rank/rank.component';
 import { HttpService } from './_services/http.service';
-
+import { FileUploadModule } from 'ng2-file-upload';
 import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -53,6 +50,7 @@ import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
     NavbarUserComponent,
     RankComponent,
     SearchByDatePageComponent,
+    AddPhotoPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +59,7 @@ import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    FileUploadModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv'}),
   ],
   exports: [
@@ -70,12 +69,9 @@ import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
     AlertService,
     AuthenticationService,
     HttpService,
-    UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-    // provider used to create fake backend
-    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
