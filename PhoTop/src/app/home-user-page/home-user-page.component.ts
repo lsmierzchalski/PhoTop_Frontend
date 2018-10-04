@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { User2 } from '../_models/user2';
 import { HttpService } from '../_services/http.service';
@@ -14,7 +15,9 @@ export class HomeUserPageComponent implements OnInit {
     user: User2;
     userPhotos: Photo[];
 
-    constructor(private httpService: HttpService) {
+    constructor(
+        private httpService: HttpService,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -31,8 +34,28 @@ export class HomeUserPageComponent implements OnInit {
             this.user = data;
         });
 
+        this.loadUserPhoto();
+    }
+
+    private loadUserPhoto() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.httpService.getUserPhotos(currentUser.user_id).subscribe(data => {
             this.userPhotos = data;
+        });
+    }
+
+    moreInfoAboutPhoto(photo_id: number) {
+        const selectPhoto = new Photo();
+        selectPhoto.photo_id = photo_id;
+        localStorage.setItem('selectPhoto', JSON.stringify(selectPhoto));
+
+        this.router.navigateByUrl('/wybrane-zdjecie');
+    }
+
+    deletePhoto(photo_id: number) {
+        this.httpService.deletePhoto(photo_id).subscribe(data => {
+            this.userPhotos = data;
+            this.loadUserPhoto();
         });
     }
 }

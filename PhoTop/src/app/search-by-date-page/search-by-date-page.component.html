@@ -26,29 +26,27 @@
                 Brak wyników
             </div>
         </div>
-        <div *ngFor="let photo of photos">
-            <div class="row" >
-                <div class="col-md-8">
-                    <a >
-                        <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
-                            <cl-transformation width="700" height="300" gravity="faces" crop="fill">
-                            </cl-transformation>
-                        </cl-image>
+        
+        <div class="row">
+            <div *ngFor="let photo of photos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+                <div class="card h-100">
+                    <a href="#">
+                        <a>
+                            <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
+                                <cl-transformation width="700" height="400" gravity="faces" crop="fill">
+                                </cl-transformation>
+                            </cl-image>
+                        </a>
                     </a>
-                </div>
-                <div class="col-md-5">
-                    <h3>{{photo.title}}</h3>
-                    <p>{{photo.description}}</p>
-                    <h2>★ {{photo.rating}} &nbsp;&nbsp;&nbsp;<small><small>{{photo.number_of_ratings}} ocen</small></small></h2>
-                    <a class="btn btn-dark" style="color: white;">Zobacz więcej</a>
-                    <ngb-rating [(rate)]="photo.currentRate">
-                        <span>&#9733;</span>
-                    </ngb-rating>
-                    <hr>
-                    <pre>Rate: <b>{{photo.currentRate}}</b></pre>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a>{{photo.title}}</a>
+                        </h4>
+                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
+                        <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Zobacz więcej</button>
+                    </div>
                 </div>
             </div>
-            <hr>
         </div>
     </div>
 </div>

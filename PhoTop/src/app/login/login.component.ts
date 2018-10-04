@@ -6,12 +6,12 @@ import * as jwt_decode from 'jwt-decode';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { AlertService } from '../_services/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
-
+import { HttpService } from '../_services/http.service';
 import { User } from '../_models/user';
 
 
 @Component({
-  templateUrl: 'login.component.html'
+    templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) {}
+        private alertService: AlertService,
+        private httpService: HttpService) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -67,12 +68,11 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     console.log(user);
                     this.router.navigate([this.returnUrl]);
-                  },
-                  error => {
+                },
+                error => {
                     this.alertService.error('Login lub hasło jest niepoprawny.');
                     this.loading = false;
                 });
-
 
         // console.log(this.user);
         // console.log(JSON.parse(localStorage.getItem('currentUser')));

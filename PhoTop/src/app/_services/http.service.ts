@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../environments/environment';
 import { Photo } from '../_models/photo';
+import { Photo2 } from '../_models/photo2';
 import { Post } from '../_models/post';
 import { User } from '../_models/user';
 import { User2 } from '../_models/user2';
+import { Rating2 } from '../_models/rating2';
 
 import { Tag } from '../_models/tag';
 
@@ -17,22 +19,7 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     getUser(user_id: number): Observable<User2> {
-        return this.http.get<User2>(`${environment.photopApiUrl}users/24`);
-    }
-
-    getUser2(): Observable<User2> {
-        return this.http.get<User2>(`${environment.photopApiUrl}users/2`);
-    }
-
-    getUser3() {
-        this.http.get(`${environment.photopApiUrl}users/2`)
-        .subscribe(photos => {
-            console.log(photos);
-        });
-    }
-
-    getUser4() {
-        this.http.get<User2>(`${environment.photopApiUrl}users/2`);
+        return this.http.get<User2>(`${environment.photopApiUrl}users/${user_id}`);
     }
 
     getPhotos(): Observable<Photo[]> {
@@ -75,4 +62,25 @@ export class HttpService {
         const url: string = environment.photopApiUrl + 'photos/' + user_id;
         return this.http.get<Photo[]>(url);
     }
+
+    getPhotoWithUserRating(photo_id: number): Observable<Photo2> {
+        const url: string = environment.photopApiUrl + 'photos/photo/' + photo_id;
+        return this.http.get<Photo2>(url);
+    }
+
+    putRating(photo_id: number, rating: number): Observable<any> {
+        const url = `${environment.photopApiUrl}ratings`;
+        const rating2 = new Rating2();
+        rating2.photo_id = photo_id;
+        rating2.rating = rating;
+        const data  = JSON.stringify(rating2);
+        console.log(data);
+        // tslint:disable-next-line:max-line-length
+        return this.http.put<any>(url, { photo_id: photo_id, rating: rating});
+    }
+
+    deletePhoto(photo_id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.photopApiUrl}photos/${photo_id}`);
+    }
+
 }

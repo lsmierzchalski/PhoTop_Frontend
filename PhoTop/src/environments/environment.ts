@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4000',
-  photopApiUrl: 'http://localhost:8090/'
-
+  // photopApiUrl: 'http://localhost:8090/'
+  photopApiUrl: 'https://localhost:8443/'
 };
 
 /*

@@ -1,5 +1,6 @@
 import { Component, OnInit, Injectable} from '@angular/core';
 import {NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerI18n, NgbCalendarPersian} from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService } from '../_services/http.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,7 +37,7 @@ export class SearchByDatePageComponent implements OnInit {
     fromDate: NgbDate;
     toDate: NgbDate;
 
-    constructor(private httpSerive: HttpService, calendar: NgbCalendar) {
+    constructor(private httpSerive: HttpService, calendar: NgbCalendar, private router: Router) {
         this.fromDate = calendar.getToday();
         this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     }
@@ -76,5 +77,13 @@ export class SearchByDatePageComponent implements OnInit {
         this.httpSerive.getPhotosBetweenDate(this.fromDate, this.toDate).subscribe(photos => {
             this.photos = photos;
         });
+    }
+
+    moreInfoAboutPhoto(photo_id: number) {
+        const selectPhoto = new Photo();
+        selectPhoto.photo_id = photo_id;
+        localStorage.setItem('selectPhoto', JSON.stringify(selectPhoto));
+
+        this.router.navigateByUrl('/wybrane-zdjecie');
     }
 }

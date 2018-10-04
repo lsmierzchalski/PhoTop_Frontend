@@ -7,25 +7,19 @@
         <div *ngFor="let photo of photos; let i = index" [attr.data-index]="i">
             <div class="row" >
                 <div class="col-md-7">
-                    <h2>Miejsce {{i+1}}</h2>
                     <a>
                         <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
                             <cl-transformation width="700" height="300" gravity="faces" crop="fill">
                             </cl-transformation>
                         </cl-image>
                     </a>
+                    <h2>Miejsce {{i+1}}</h2>
                 </div>
                 <div class="col-md-5">
                     <h3>{{photo.title}}</h3>
                     <p>{{photo.description}}</p>
                     <h2>★ {{photo.rating}} &nbsp;&nbsp;&nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
-                    <a class="btn btn-dark" style="color: white;">Zobacz więcej</a>
-                    <p>
-                        <ngb-rating [(rate)]="photo.currentRate">
-                            <h1>&#9733;</h1>
-                        </ngb-rating>
-                    </p>
-
+                    <a class="btn btn-dark" style="color: white;" (click)="moreInfoAboutPhoto(photo.photo_id)" >Zobacz więcej</a>
                 </div>
             </div>
             <!-- /.row -->

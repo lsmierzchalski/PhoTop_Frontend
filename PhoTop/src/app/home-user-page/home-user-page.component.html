@@ -1,6 +1,7 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
+            <app-alert></app-alert>
         <div class="row" *ngIf="user">
             <div class="col-md-3 text-center">
                     <cl-image public-id="{{user.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
@@ -22,21 +23,21 @@
             <div *ngFor="let photo of userPhotos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
                 <div class="card h-100">
                     <a href="#">
-                        <a>
-                            <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
-                                <cl-transformation width="700" height="400" gravity="faces" crop="fill">
-                                </cl-transformation>
-                            </cl-image>
-                        </a>
+                        <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
+                            <cl-transformation width="700" height="400" gravity="faces" crop="fill">
+                            </cl-transformation>
+                        </cl-image>
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a>{{photo.title}}</a>
                         </h4>
                         <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
-                        <button class="btn btn-dark">Więcej</button>
+                        <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Więcej</button>
                         &nbsp;
                         <button class="btn btn-dark">Edytuj</button>
+                        &nbsp;
+                        <button class="btn btn-danger" (click)="deletePhoto(photo.photo_id)" >&nbsp;Usuń&nbsp;</button>
                     </div>
                 </div>
             </div>

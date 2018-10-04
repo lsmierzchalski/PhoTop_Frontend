@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 data => {
                     this.alertService.success('Rejestracja powiodał się', true);
-                    this.router.navigate(['/logowanie']);
+                    this.router.navigateByUrl('/logowanie');
                 },
                 error => {
                     this.alertService.error('Login lub email został już wykorzystany.');

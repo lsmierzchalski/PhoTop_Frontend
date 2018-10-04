@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarUserComponent } from './navbar-user/navbar-user.component';
 import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-page.component';
 import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component';
+import { PhotosPageComponent } from './photos-page/photos-page.component';
 
 import { AlertComponent } from './_directives/alert.component';
 import { AlertService } from './_services/alert.service';
@@ -51,6 +52,7 @@ import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
     RankComponent,
     SearchByDatePageComponent,
     AddPhotoPageComponent,
+    PhotosPageComponent,
   ],
   imports: [
     BrowserModule,

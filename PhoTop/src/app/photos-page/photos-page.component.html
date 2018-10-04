@@ -1,0 +1,36 @@
+<app-navbar-user></app-navbar-user>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="my-4">{{selectPhotos.title}}</h1>
+    
+            <!-- Portfolio Item Row -->
+            <div class="row">
+    
+            <div class="col-md-8">
+                <cl-image public-id="{{selectPhotos.file_path}}" class="img-fluid" format="jpg">
+                    <cl-transformation width="750" height="500" gravity="faces" crop="fill">
+                    </cl-transformation>
+                </cl-image>
+            </div>
+    
+            <div class="col-md-4">
+                <h3 class="my-3">Opis</h3>
+                <p>{{selectPhotos.description}}</p>
+                <h3 class="my-3">Tagi</h3>
+                <p *ngIf="!selectPhotos.tags">Brak tagów</p>
+                <a *ngFor="let tag of selectPhotos.tags" class="badge badge-secondary" style="color: white; font-size: 15px; margin-right: 10px;">{{tag}}</a>
+                <h3 class="my-3">Ocena</h3>
+                <h2>★ {{selectPhotos.rating}} &nbsp;&nbsp;&nbsp;<small><small>(liczba ocen: {{selectPhotos.number_of_ratings}} )</small></small></h2>
+                
+                <ngb-rating [(rate)]="currentRate" (hover)="hovered=$event" (leave)="hovered=0" (click)="postRatingUser(hovered)">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100" >&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+    

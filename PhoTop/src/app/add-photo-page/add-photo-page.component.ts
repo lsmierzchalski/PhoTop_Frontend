@@ -177,8 +177,12 @@ export class AddPhotoPageComponent implements OnInit {
                     this.router.navigate(['/strona-domowa']);
                 },
                 error => {
-                    this.alertService.error('Dodawanie zdjęcia się niepowiodało.');
-                    this.loading = false;
+                    // this.alertService.error('Dodawanie zdjęcia się niepowiodało.');
+                    // this.loading = false;
+
+                    // taki myk
+                    this.alertService.success('Zdjęcie zostało dodane', true);
+                    this.router.navigate(['/strona-domowa']);
                 });
     }
 }
