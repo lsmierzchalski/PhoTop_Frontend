@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerI18n, NgbCalendarPersian } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerI18n, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService } from '../_services/http.service';
@@ -42,15 +42,21 @@ export class SearchByDatePageComponent implements OnInit {
 
     placeholderDate = 'Od rrrr-mm-dd Do rrrr-mm-dd';
 
-    constructor(private httpSerive: HttpService, calendar: NgbCalendar, private router: Router) {
+    constructor(
+        private httpSerive: HttpService,
+        private calendar: NgbCalendar,
+        private router: Router,
+        config: NgbDatepickerConfig) {
         const selectDate = JSON.parse(localStorage.getItem('selectDate'));
         if (selectDate) {
             this.fromDate = selectDate.fromDate;
             this.toDate = selectDate.toDate;
         } else {
-            this.fromDate = calendar.getPrev(calendar.getToday(), 'd', 10);
+            this.fromDate  = calendar.getPrev(calendar.getToday(), 'd', 10);
             this.toDate = calendar.getToday();
         }
+        config.minDate = {year: 2000, month: 1, day: 1};
+        config.maxDate = calendar.getToday();
     }
 
     ngOnInit() {
@@ -89,6 +95,10 @@ export class SearchByDatePageComponent implements OnInit {
 
     isRange(date: NgbDate) {
         return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+    }
+
+    isFuture(date: NgbDate) {
+        return date.after(this.calendar.getToday());
     }
 
     private loadPhotosByDate() {
