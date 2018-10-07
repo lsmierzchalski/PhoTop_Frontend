@@ -40,8 +40,8 @@ export class HttpService {
         return this.http.get<Tag>(`${environment.photopApiUrl}tags/1`);
     }
 
-    getTag2(): Observable<any> {
-        return this.http.get<any>(`${environment.photopApiUrl}tags/1`);
+    getTags(): Observable<Tag[]> {
+        return this.http.get<Tag[]>(`${environment.photopApiUrl}tags`);
     }
 
     getPost(): Observable<Post> {

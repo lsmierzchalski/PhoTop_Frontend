@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService } from '../_services/http.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Tag } from '../_models/tag';
 
 @Component({
     selector: 'app-search-by-tag-page',
@@ -11,14 +12,45 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class SearchByTagPageComponent implements OnInit {
 
-    placeholderDate = 'Od rrrr-mm-dd Do rrrr-mm-dd';
+    // tslint:disable-next-line:max-line-length
+    ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    alphabet: String[];
+    tagsAlphabet: Array<AlphTags> = [];
+
+    tags: Tag[];
 
     constructor(
-        private httpSerive: HttpService,
+        private httpService: HttpService,
          private router: Router) {
     }
 
     ngOnInit() {
+        this.loadTags();
+    }
+
+    private loadTags() {
+        this.httpService.getTags().subscribe(
+            data => {
+                this.loadAlphabet(data);
+            }
+        );
+    }
+
+    private loadAlphabet(tags: Tag[]) {
+        for (const char of this.ALPHABET) {
+            const table: Array<Tag> = [];
+            for (const tag of tags) {
+                if ( char === tag.name[0].toUpperCase()) {
+                    table.push(tag);
+                }
+            }
+            if (table.length > 0) {
+                const newItem = new AlphTags();
+                newItem.char = char;
+                newItem.tags = table;
+                this.tagsAlphabet.push(newItem);
+            }
+        }
     }
 
     // moreInfoAboutPhoto(photo_id: number) {
@@ -32,4 +64,9 @@ export class SearchByTagPageComponent implements OnInit {
     //     localStorage.setItem('selectDate', JSON.stringify(selectDate));
     //     this.router.navigateByUrl('/wybrane-zdjecie');
     // }
+}
+
+export class AlphTags {
+    char: string;
+    tags: Array<Tag>;
 }

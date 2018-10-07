@@ -3,6 +3,18 @@
     <div class="container">
         <h1 class="my-4">Szukaj według tagu</h1>
         <p>Wybierz interesujący cie tag klikając w niego</p>
-
+        <div *ngFor="let alphTags of tagsAlphabet;">
+            <div>
+                <div style="display: inline-block; width: 60px; height: 30px; text-align: center;">{{alphTags.char}}</div>
+                <div style="display: inline-block; width: 80%; height: 30px; padding-top: 7px;">
+                    <hr>
+                </div>
+            </div>
+            <div style="margin-left: 60px;">
+                <button *ngFor="let tag of alphTags.tags" type="button"  class="badge badge-secondary" style="color: white; font-size: 15px; margin-right: 10px;" ngbPopover="{{tag.discripton}}" triggers="mouseenter:mouseleave" >
+                    {{tag.name}}
+                </button>
+            </div>
+        </div>
     </div>
 </div>
