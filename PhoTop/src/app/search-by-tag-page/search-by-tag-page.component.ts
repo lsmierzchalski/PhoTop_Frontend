@@ -21,7 +21,7 @@ export class SearchByTagPageComponent implements OnInit {
 
     constructor(
         private httpService: HttpService,
-         private router: Router) {
+        private router: Router) {
     }
 
     ngOnInit() {

@@ -52,10 +52,10 @@ export class HttpService {
         return this.http.post(`${environment.photopApiUrl}users/sign`, user);
     }
 
-    addPhoto(title: string, description: string, file_path: string) {
+    addPhoto(title: string, description: string, file_path: string, tags: number[]) {
         const url = `${environment.photopApiUrl}photos`;
         // tslint:disable-next-line:max-line-length
-        return this.http.post<any>(url, { title: title, file_path: file_path, description: description});
+        return this.http.post<any>(url, { title: title, file_path: file_path, description: description, tags: tags});
     }
 
     getUserPhotos(user_id: number): Observable<Photo[]> {

@@ -3,9 +3,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <app-alert></app-alert>
-            <h1>Dodaj zdjęcie</h1>
-            <form [formGroup]="addPhotoForm" (ngSubmit)="onSubmit()">
+                <app-alert></app-alert>
+                <h1>Dodaj zdjęcie</h1>
+                <form [formGroup]="addPhotoForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="title">Tytuł</label>
                         <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
@@ -23,30 +23,55 @@
                             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                             <a [routerLink]="['/strona-domowa']" class="btn btn-link" style="color: #292828">Powróć do profilu</a>
                         </div>
-                    </form>
-                    <h3>Wybierz plik</h3>
-                    <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                        (fileOver)="fileOverBase($event)" [uploader]="uploader"
-                        class="well my-drop-zone" >Upuść tutaj obraz</div>
-                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                </form>
+
+                <h3>Wybierz plik</h3>
+                <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                    (fileOver)="fileOverBase($event)" [uploader]="uploader"
+                    class="well my-drop-zone" >
+                    Upuść tutaj obraz
+                </div>
+                <div style="height: 10px;"></div>
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+                <div>
+                    <div class="progress">
+                        <div class="progress-bar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <p *ngIf="currentSize == startSize && !submitted">
+                    Dodaj obraz, przeciągając i upuszczając go na powyższe pole lub wyszukując w zasobach komputera po kliknięciu przyciku "Wybierz plik".
+                </p>
+                <p *ngIf="currentSize == startSize && submitted"  style="color: red;">
+                    Plik jest wymagany
+                </p>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <cl-image *ngIf="currentSize != startSize" [public-id]="imageDataArray[imageDataArray.length-1].public_id" class="imgThumbnail" format="jpg" class="img-fluid">
+                        </cl-image>
+                    </div>
+                </div>
+                
+                <h3>Wybierz tagi</h3>
+                <p>Wybierz interesujący cie tag klikając w niego</p>
+                <div *ngFor="let alphTags of tagsAlphabet;">
                     <div>
-                        <div class="progress">
-                            <div class="progress-bar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                        <div style="display: inline-block; width: 60px; height: 30px; text-align: center;">{{alphTags.char}}</div>
+                        <div style="display: inline-block; width: 80%; height: 30px; padding-top: 7px;">
+                            <hr>
                         </div>
                     </div>
-                    <p *ngIf="currentSize == startSize && !submitted">
-                        Dodaj obraz, przeciągając i upuszczając go na powyższe pole
-                    </p>
-                    <p *ngIf="currentSize == startSize && submitted"  style="color: red;">
-                        Plik jest wymagany
-                    </p>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <cl-image *ngIf="currentSize != startSize" [public-id]="imageDataArray[imageDataArray.length-1].public_id" class="imgThumbnail" format="jpg" class="img-fluid">
-                                
-                            </cl-image>
-                        </div>
+                    <div style="margin-left: 60px;">
+                        <ng-container *ngFor="let tag of alphTags.tags" >
+                            <button *ngIf="!tag.isSelect" type="button" (click)="toogleIsSelectTag(tag.tag.name)" class="badge badge-secondary" style="color: white; font-size: 15px; margin-right: 10px;" ngbPopover="{{tag.tag.discripton}}" triggers="mouseenter:mouseleave" >
+                                {{tag.tag.name}}
+                            </button>
+                            <button *ngIf="tag.isSelect" type="button" (click)="toogleIsSelectTag(tag.tag.name)" class="badge badge-dark" style="color: white; font-size: 15px; margin-right: 10px;" ngbPopover="{{tag.tag.discripton}}" triggers="mouseenter:mouseleave" >
+                                {{tag.tag.name}}
+                            </button>
+                        </ng-container>
                     </div>
+                </div>
+
             </div>
         </div>
     </div>

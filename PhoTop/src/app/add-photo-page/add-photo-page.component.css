@@ -9,3 +9,15 @@
 .imgThumbnail{
 	padding: 4px;
 }
+
+.tagIsSelect {
+    color: red;
+    opacity: 1;
+    font-style: italic;
+}
+
+.tagIsNotSelect {
+    color: blue;
+    opacity: 0.5;
+    font-weight: bold;
+}

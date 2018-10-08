@@ -10,6 +10,7 @@ import { DB } from '../database';
 
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
+import { Tag } from '../_models/tag';
 
 @Component({
     selector: 'app-add-photo-page',
@@ -34,6 +35,13 @@ export class AddPhotoPageComponent implements OnInit {
     text_file_path: Input;
     updateFile = false;
 
+    // tslint:disable-next-line:max-line-length
+    ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    alphabet: String[];
+    tagsAlphabet: Array<AlphTags> = [];
+
+    tags: Tag[];
+
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -44,6 +52,8 @@ export class AddPhotoPageComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.loadTags();
 
         this.addPhotoForm = this.formBuilder.group({
             title: ['', Validators.required],
@@ -136,8 +146,6 @@ export class AddPhotoPageComponent implements OnInit {
             this.currentSize = this.imageDataArray.length;
             this.file_current_name = this.imageDataArray[this.imageDataArray.length - 1].public_id;
             this.updateFile = true;
-            console.log(this.imageDataArray);
-            console.log(this.startSize, this.currentSize, this.imageDataArray.length, this.file_current_name );
         }
     }
 
@@ -147,7 +155,6 @@ export class AddPhotoPageComponent implements OnInit {
             this.imageDataArray = imageCollection.find();
             this.startSize = this.imageDataArray.length;
             this.currentSize = this.imageDataArray.length;
-            console.log(this.startSize, this.currentSize, this.imageDataArray.length, this.file_current_name );
         }
     }
 
@@ -169,20 +176,73 @@ export class AddPhotoPageComponent implements OnInit {
             return;
         }
 
+        const tags: number[] = [];
+        for (const tagsA of this.tagsAlphabet) {
+            for (const tag of tagsA.tags) {
+                if (tag.isSelect === true) {
+                    tags.push(tag.tag.tag_id);
+                }
+            }
+        }
+
         this.loading = true;
-        this.httpService.addPhoto(this.f.title.value, this.f.description.value, this.file_current_name)
+        this.httpService.addPhoto(this.f.title.value, this.f.description.value, this.file_current_name, tags)
             .subscribe(
                 data => {
                     this.alertService.success('Zdjęcie zostało dodane', true);
                     this.router.navigate(['/strona-domowa']);
                 },
                 error => {
-                    // this.alertService.error('Dodawanie zdjęcia się niepowiodało.');
-                    // this.loading = false;
-
-                    // taki myk
-                    this.alertService.success('Zdjęcie zostało dodane', true);
-                    this.router.navigate(['/strona-domowa']);
+                    this.alertService.error('Dodawanie zdjęcia się niepowiodło.');
+                    this.loading = false;
                 });
     }
+
+    private loadTags() {
+        this.httpService.getTags().subscribe(
+            data => {
+                this.loadAlphabet(data);
+            }
+        );
+    }
+
+    private loadAlphabet(tags: Tag[]) {
+        for (const char of this.ALPHABET) {
+            const table: Array<TagWithSelect> = [];
+            for (const tag of tags) {
+                if ( char === tag.name[0].toUpperCase()) {
+                    const newItem = new TagWithSelect();
+                    newItem.tag = tag;
+                    newItem.isSelect = false;
+                    table.push(newItem);
+                }
+            }
+            if (table.length > 0) {
+                const newItem = new AlphTags();
+                newItem.char = char;
+                newItem.tags = table;
+                this.tagsAlphabet.push(newItem);
+            }
+        }
+    }
+
+    toogleIsSelectTag(tag_name: string) {
+        for (const tags of this.tagsAlphabet) {
+            for (const tag of tags.tags) {
+                if (tag.tag.name === tag_name) {
+                    tag.isSelect = !tag.isSelect;
+                }
+            }
+        }
+    }
+}
+
+export class AlphTags {
+    char: string;
+    tags: Array<TagWithSelect>;
+}
+
+export class TagWithSelect {
+    tag: Tag;
+    isSelect: boolean;
 }
