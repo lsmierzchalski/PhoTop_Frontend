@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div style="margin-left: 60px;">
-                <button *ngFor="let tag of alphTags.tags" type="button"  class="badge badge-secondary" style="color: white; font-size: 15px; margin-right: 10px;" ngbPopover="{{tag.discripton}}" triggers="mouseenter:mouseleave" >
+                <button *ngFor="let tag of alphTags.tags" (click)="moreInfoAboutPhoto(tag.name)" type="button"  class="badge badge-secondary" style="color: white; font-size: 15px; margin-right: 10px;" ngbPopover="{{tag.discripton}}" triggers="mouseenter:mouseleave" >
                     {{tag.name}}
                 </button>
             </div>

@@ -36,6 +36,7 @@ import { RankComponent } from './rank/rank.component';
 import { HttpService } from './_services/http.service';
 import { FileUploadModule } from 'ng2-file-upload';
 import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
+import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/search-by-tag-photos-page.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
     AddPhotoPageComponent,
     PhotosPageComponent,
     SearchByTagPageComponent,
+    SearchByTagPhotosPageComponent,
   ],
   imports: [
     BrowserModule,

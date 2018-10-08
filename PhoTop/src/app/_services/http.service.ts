@@ -63,6 +63,11 @@ export class HttpService {
         return this.http.get<Photo[]>(url);
     }
 
+    getPhotosWithTag(tag_name: string): Observable<Photo[]> {
+        const url: string = environment.photopApiUrl + 'photos/tag/' + tag_name;
+        return this.http.get<Photo[]>(url);
+    }
+
     getPhotoWithUserRating(photo_id: number): Observable<Photo2> {
         const url: string = environment.photopApiUrl + 'photos/photo/' + photo_id;
         return this.http.get<Photo2>(url);

@@ -12,6 +12,7 @@ import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-
 import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component';
 import { PhotosPageComponent } from './photos-page/photos-page.component';
 import { SearchByTagPageComponent } from './search-by-tag-page/search-by-tag-page.component';
+import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/search-by-tag-photos-page.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'edycja-profilu', component: EditPrifileComponent },
     { path: 'wybrane-zdjecie', component: PhotosPageComponent },
     { path: 'szukaj-wedlug-tagu', component: SearchByTagPageComponent },
+    { path: 'szukaj-wedlug-tagu-zdjec', component: SearchByTagPhotosPageComponent },
     // { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'glowna', component: HomeComponent },
     { path: 'strona-domowa', component: HomeUserPageComponent },

@@ -64,7 +64,7 @@
                         <h4 class="card-title">
                             <a>{{photo.title}}</a>
                         </h4>
-                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: {{photo.number_of_ratings}} )</small></small></h2>
+                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: <span *ngIf="photo.number_of_ratings===null">0</span> {{photo.number_of_ratings}} )</small></small></h2>
                         <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Zobacz więcej</button>
                     </div>
                 </div>

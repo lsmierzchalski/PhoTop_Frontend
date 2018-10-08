@@ -53,17 +53,12 @@ export class SearchByTagPageComponent implements OnInit {
         }
     }
 
-    // moreInfoAboutPhoto(photo_id: number) {
-    //     const selectPhoto = new Photo();
-    //     selectPhoto.photo_id = photo_id;
-    //     localStorage.setItem('selectPhoto', JSON.stringify(selectPhoto));
-
-    //     const selectDate = new SelectDate();
-    //     selectDate.fromDate = this.fromDate;
-    //     selectDate.toDate = this.toDate;
-    //     localStorage.setItem('selectDate', JSON.stringify(selectDate));
-    //     this.router.navigateByUrl('/wybrane-zdjecie');
-    // }
+    moreInfoAboutPhoto(tag_name: string) {
+        const selectTag = new Tag();
+        selectTag.name = tag_name;
+        localStorage.setItem('selectTag', JSON.stringify(selectTag));
+        this.router.navigateByUrl('/szukaj-wedlug-tagu-zdjec');
+    }
 }
 
 export class AlphTags {

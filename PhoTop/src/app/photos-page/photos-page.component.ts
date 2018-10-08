@@ -5,6 +5,7 @@ import { HttpService } from '../_services/http.service';
 import { Photo2 } from '../_models/photo2';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Tag } from '../_models/tag';
 
 @Component({
     selector: 'app-photos-page',
@@ -60,5 +61,12 @@ export class PhotosPageComponent implements OnInit {
             this.config.readonly = false;
             this.loadSelectPhotoData();
         });
+    }
+
+    moreInfoAboutPhoto(tag_name: string) {
+        const selectTag = new Tag();
+        selectTag.name = tag_name;
+        localStorage.setItem('selectTag', JSON.stringify(selectTag));
+        this.router.navigateByUrl('/szukaj-wedlug-tagu-zdjec');
     }
 }
