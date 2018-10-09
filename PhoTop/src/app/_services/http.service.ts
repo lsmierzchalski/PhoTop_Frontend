@@ -94,4 +94,9 @@ export class HttpService {
         return this.http.put<any>(url, { name: name, surname: surname, description: description, avatar: avatar});
     }
 
+    editPhotoData(title: string, description: string) {
+        const url = `https://localhost:8443/photos`;
+        // tslint:disable-next-line:max-line-length
+        return this.http.put<any>(url, { title: title, description: description});
+    }
 }
