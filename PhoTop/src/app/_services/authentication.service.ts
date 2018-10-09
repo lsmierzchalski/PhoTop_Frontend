@@ -12,12 +12,13 @@ export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
     login(login: string, password: string) {
-        const url = `${environment.photopApiUrl}login`;
+        // const url = `${environment.photopApiUrl}login`;
+        const url = 'https://localhost:8443/login';
         return this.http.post<any>(url, JSON.stringify({ login: login, password: password }), { observe: 'response' });
     }
 
     getUser(user_id: number) {
-        const url = `${environment.photopApiUrl}users/${user_id}`;
+        const url = `https://localhost:8443/users/${user_id}`;
         console.log(url);
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         console.log('get user -> ', currentUser.token);
@@ -26,7 +27,7 @@ export class AuthenticationService {
 
     login2(user_id: number) {
 
-        const url = `${environment.photopApiUrl}users/${user_id}`;
+        const url = `https://localhost:8443/users/${user_id}`;
         console.log(url);
         return this.http.get<User>(url)
             .pipe(map(user => {

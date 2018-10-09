@@ -31,8 +31,9 @@ export class EditPrifileComponent implements OnInit {
     public currentSize: number;
     public file_current_name: string;
 
-    text_file_path: Input;
     updateFile = false;
+
+    user: User2;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -46,18 +47,16 @@ export class EditPrifileComponent implements OnInit {
     ngOnInit() {
 
         this.addPhotoForm = this.formBuilder.group({
-            login: ['', [Validators.required, Validators.minLength(3)]],
             name: ['', Validators.required],
             surname: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            description: ['', Validators.required]
+            description: ['']
         });
 
         this.loadDB();
         this.loadEmptyImages();
         const uploaderOptions: FileUploaderOptions = {
-        url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/image/upload`,
-        // Upload files automatically upon addition to upload queue
+            url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/image/upload`,
+            // Upload files automatically upon addition to upload queue
         autoUpload: true,
         // Use xhrTransport in favor of iframeTransport
         isHTML5: true,
@@ -70,55 +69,57 @@ export class EditPrifileComponent implements OnInit {
             value: 'XMLHttpRequest'
             }
         ]
-    };
+        };
 
-    const upsertResponse = fileItem => {
-        // Check if HTTP request was successful
-        if (fileItem.status !== 200) {
-          console.log('Upload to cloudinary Failed');
-          console.log(fileItem);
-          return false;
-        }
-        let imageCollection = DB.getCollection('imagegallery');
-        if (!imageCollection) {
-          imageCollection = DB.addCollection('imagegallery');
-        }
-        imageCollection.insert(fileItem.data);
-        const that = this;
-        DB.saveDatabase(function(saveErr) {
-          if (saveErr) {
-            console.log('error : ' + saveErr);
-          } else {
-            that.loadUploadedImages();
-          }
-        });
-    };
+        const upsertResponse = fileItem => {
+            // Check if HTTP request was successful
+            if (fileItem.status !== 200) {
+                console.log('Upload to cloudinary Failed');
+                console.log(fileItem);
+                return false;
+            }
+            let imageCollection = DB.getCollection('imagegallery');
+            if (!imageCollection) {
+                imageCollection = DB.addCollection('imagegallery');
+            }
+            imageCollection.insert(fileItem.data);
+            const that = this;
+            DB.saveDatabase(function(saveErr) {
+                if (saveErr) {
+                console.log('error : ' + saveErr);
+                } else {
+                that.loadUploadedImages();
+                }
+            });
+        };
 
-    this.uploader = new FileUploader(uploaderOptions);
-    this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
-        // Add Cloudinary's unsigned upload preset to the upload form
-        form.append('upload_preset', this.cloudinary.config().upload_preset);
-        // Add built-in and custom tags for displaying the uploaded photo in the list
-        let tags = 'angularimagegallery';
-        if (this.title2) {
-          form.append('context', `photo=${this.title2}`);
-          tags = `angularimagegallery,${this.title2}`;
-        }
-        form.append('tags', tags);
-        form.append('file', fileItem);
-        // Use default "withCredentials" value for CORS requests
-        fileItem.withCredentials = false;
-    };
+        this.uploader = new FileUploader(uploaderOptions);
+        this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
+            // Add Cloudinary's unsigned upload preset to the upload form
+            form.append('upload_preset', this.cloudinary.config().upload_preset);
+            // Add built-in and custom tags for displaying the uploaded photo in the list
+            let tags = 'angularimagegallery';
+            if (this.title2) {
+            form.append('context', `photo=${this.title2}`);
+            tags = `angularimagegallery,${this.title2}`;
+            }
+            form.append('tags', tags);
+            form.append('file', fileItem);
+            // Use default "withCredentials" value for CORS requests
+            fileItem.withCredentials = false;
+        };
 
-    // Update model on completion of uploading a file
-    this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
-        upsertResponse(
-          {
-            file: item.file,
-            status,
-            data: JSON.parse(response)
-          }
+        // Update model on completion of uploading a file
+        this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
+            upsertResponse(
+            {
+                file: item.file,
+                status,
+                data: JSON.parse(response)
+            }
         );
+
+        this.loadUserData();
     }
 
     loadDB(): void {
@@ -168,20 +169,33 @@ export class EditPrifileComponent implements OnInit {
             return;
         }
 
-        if (this.file_current_name === '' || this.updateFile === false) {
-            return;
-        }
+        this.loading = true;
+        this.httpService.editUserData(this.f.name.value, this.f.surname.value, this.f.description.value, this.file_current_name)
+            .subscribe(
+                data => {
+                    this.alertService.success('Edycja powiodła się', true);
+                    this.router.navigate(['/strona-domowa']);
+                },
+                error => {
+                    this.alertService.error('Edycja profilu nie powiodła się.');
+                    this.loading = false;
+                });
+    }
 
-        // this.loading = true;
-        // this.httpService.addPhoto(this.f.title.value, this.f.description.value, this.file_current_name)
-        //     .subscribe(
-        //         data => {
-        //             this.alertService.success('Zdjęcie zostało dodane', true);
-        //             this.router.navigate(['/strona-domowa']);
-        //         },
-        //         error => {
-        //             this.alertService.error('Dodawanie zdjęcia się niepowiodało.');
-        //             this.loading = false;
-        //         });
+    private loadUserData() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.httpService.getUser(currentUser.user_id).subscribe(data => {
+            console.log(data);
+            if (!data.avatar) {
+                data.avatar = 'default_avatar';
+            }
+            this.user = data;
+
+            this.addPhotoForm = this.formBuilder.group({
+                name: [this.user.name, Validators.required],
+                surname: [this.user.surname, Validators.required],
+                description: [this.user.description]
+            });
+        });
     }
 }
