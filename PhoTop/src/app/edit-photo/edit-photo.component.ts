@@ -5,6 +5,7 @@ import { HttpService } from '../_services/http.service';
 import { Router } from '@angular/router';
 import { Photo } from '../_models/photo';
 import { Title } from '@angular/platform-browser';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-photo',
@@ -42,7 +43,13 @@ export class EditPhotoComponent implements OnInit {
     const selectPhotos = JSON.parse(localStorage.getItem('selectPhoto'));
     console.log(selectPhotos);
     console.log('selectphotos: ', selectPhotos.photo_id);
-
+    this.httpService.editPhotoData(selectPhotos, this.photoGroup.value.title, this.photoGroup.value.description).subscribe(data => {
+      this.alertService.success('Edycja powiodła się', true);
+      this.router.navigate(['/strona-domowa']);
+    },
+      error => {
+        this.alertService.error('Edycja profilu nie powiodła się.');
+      });
     // this.httpService.editPhoto(selectPhotos.photo_id, this.photoGroup.value.title, this.photoGroup.value.description).subscribe(data => {
 
     // });
