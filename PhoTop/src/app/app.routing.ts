@@ -13,6 +13,8 @@ import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component
 import { PhotosPageComponent } from './photos-page/photos-page.component';
 import { SearchByTagPageComponent } from './search-by-tag-page/search-by-tag-page.component';
 import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/search-by-tag-photos-page.component';
+import { EditPhotoComponent } from './edit-photo/edit-photo.component';
+import { SearchPhotoComponent } from './search-photo/search-photo.component';
 
 const routes: Routes = [
 
@@ -29,6 +31,8 @@ const routes: Routes = [
     // { path: 'zmiana-h', component: ChangePasswordComponent },
     { path: 'glowna', component: HomeComponent },
     { path: 'strona-domowa', component: HomeUserPageComponent },
+    { path: 'edycja-zdjecia', component: EditPhotoComponent },
+    { path: 'szukaj-wedlug-nazwy', component: SearchPhotoComponent },
     { path: '**', component: PageNotFoundComponent },
 
 ];
