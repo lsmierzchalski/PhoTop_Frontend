@@ -1,14 +1,14 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
-            <app-alert></app-alert>
+        <app-alert></app-alert>
         <div class="row" *ngIf="user">
             <div class="col-md-3 text-center">
-                    <cl-image public-id="{{user.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
-                        <cl-transformation width="400" height="400" gravity="faces" crop="fill">
-                        </cl-transformation>
-                    </cl-image>
-                    <!-- <button class="btn btn-dark" style="margin: 10px;">Zmień avatar</button> -->
+                <cl-image public-id="{{user.avatar}}" format="jpg" class="img-fluid" style="border-radius: 50%;">
+                    <cl-transformation width="400" height="400" gravity="faces" crop="fill">
+                    </cl-transformation>
+                </cl-image>
+                <!-- <button class="btn btn-dark" style="margin: 10px;">Zmień avatar</button> -->
             </div>
             <div class="col-md-9">
                 <h1>{{user.login}}</h1>
@@ -32,16 +32,20 @@
                         <h4 class="card-title">
                             <a>{{photo.title}}</a>
                         </h4>
-                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: <span *ngIf="photo.number_of_ratings===null">0</span> {{photo.number_of_ratings}} )</small></small></h2>
+                        <h2>★ {{photo.rating}} &nbsp;
+                            <small>
+                                <small>(liczba ocen:
+                                    <span *ngIf="photo.number_of_ratings===null">0</span> {{photo.number_of_ratings}} )</small>
+                            </small>
+                        </h2>
                         <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Więcej</button>
                         &nbsp;
-                        <button class="btn btn-dark">Edytuj</button>
+                        <button class="btn btn-dark" (click)="moreInfoPhoto(photo.photo_id)">Edytuj</button>
                         &nbsp;
-                        <button class="btn btn-danger" (click)="deletePhoto(photo.photo_id)" >&nbsp;Usuń&nbsp;</button>
+                        <button class="btn btn-danger" (click)="deletePhoto(photo.photo_id)">&nbsp;Usuń&nbsp;</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    

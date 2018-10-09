@@ -37,6 +37,9 @@ import { HttpService } from './_services/http.service';
 import { FileUploadModule } from 'ng2-file-upload';
 import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
 import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/search-by-tag-photos-page.component';
+import { SearchPhotoComponent } from './search-photo/search-photo.component';
+import { EditPhotoComponent } from './edit-photo/edit-photo.component';
+import { PhotoNameFilterPipe } from './photo-name-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/sear
     PhotosPageComponent,
     SearchByTagPageComponent,
     SearchByTagPhotosPageComponent,
+    SearchPhotoComponent,
+    EditPhotoComponent,
+    PhotoNameFilterPipe,
   ],
   imports: [
     BrowserModule,

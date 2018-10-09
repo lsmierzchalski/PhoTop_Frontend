@@ -1,0 +1,39 @@
+<app-navbar-user (eventFraza)="search($event)"></app-navbar-user>
+
+
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="my-4">Szukaj według nazwy</h1>
+    <form class="form-inline row form-group">
+      <div class="col-sm-12 col-md-6">
+        Wrowadż nazwe według której chcesz szukać
+        <div style="width: 40px"></div>
+        <input name="title" type="text" class="form-control" placeholder="Szukaj po nazwie" [(ngModel)]="searchTerm" />
+      </div>
+    </form>
+
+    <div class="row">
+      <div *ngFor="let photo of photos | photoNameFilter:searchTerm" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+        <div class="card h-100">
+          <a href="#">
+            <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
+              <cl-transformation width="700" height="400" gravity="faces" crop="fill">
+              </cl-transformation>
+            </cl-image>
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a>{{photo.title}}</a>
+            </h4>
+            <h2>★ {{photo.rating}} &nbsp;
+              <small>
+                <small>(liczba ocen: {{photo.number_of_ratings}} )</small>
+              </small>
+            </h2>
+            <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Zobacz więcej</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

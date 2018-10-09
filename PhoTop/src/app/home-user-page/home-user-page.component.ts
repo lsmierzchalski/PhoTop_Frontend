@@ -52,6 +52,13 @@ export class HomeUserPageComponent implements OnInit {
         this.router.navigateByUrl('/wybrane-zdjecie');
     }
 
+    moreInfoPhoto(photo_id: number) {
+        const selectPhoto = new Photo();
+        selectPhoto.photo_id = photo_id;
+        localStorage.setItem('selectPhoto', JSON.stringify(selectPhoto));
+
+        this.router.navigateByUrl('/edycja-zdjecia');
+    }
     deletePhoto(photo_id: number) {
         this.httpService.deletePhoto(photo_id).subscribe(data => {
             this.userPhotos = data;
