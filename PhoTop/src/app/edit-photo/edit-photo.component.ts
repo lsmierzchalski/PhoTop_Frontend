@@ -15,6 +15,8 @@ import { subscribeOn } from 'rxjs/operators';
 export class EditPhotoComponent implements OnInit {
 
   photoGroup: FormGroup;
+  loading = false;
+  submitted = false;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -28,14 +30,21 @@ export class EditPhotoComponent implements OnInit {
   }
 
   private newMethod() {
-    this.photoGroup = new FormGroup({
-      title: new FormControl(),
-      description: new FormControl()
+    this.photoGroup = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
+  get f() { return this.photoGroup.controls; }
 
 
   onSubmit() {
+
+    this.submitted = true;
+
+    if (this.photoGroup.invalid) {
+      return;
+    }
     // TODO: Use EventEmitter with form value
     console.log(this.photoGroup.value.title);
     console.log(this.photoGroup.value.description);
@@ -51,6 +60,8 @@ export class EditPhotoComponent implements OnInit {
       error => {
         this.alertService.error('Edycja profilu nie powiodła się.');
       });
+
+
     // this.httpService.editPhoto(selectPhotos.photo_id, this.photoGroup.value.title, this.photoGroup.value.description).subscribe(data => {
 
     // });

@@ -10,14 +10,22 @@
         <form *ngIf="photoGroup" [formGroup]="photoGroup" (ngSubmit)="onSubmit()">
           <div class="formGroup">
             <label for="title">Tytuł</label>
-            <input type="text" formControlName="title" class="form-control" />
+            <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+            />
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+              <div *ngIf="f.title.errors.required">Tytul jest wymagany</div>
+            </div>
           </div>
           <div>
-            <label for="title">Opis</label>
-            <input type="text" formControlName="description" class="form-control" />
+            <label for="description">Opis</label>
+            <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+            />&nbsp;
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Opis jest wymagany</div>
+            </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group">&nbsp;&nbsp;
             <button [disabled]="loading" class="btn btn-dark">Edytuj profil</button>
 
             <a [routerLink]="['/strona-domowa']" class="btn btn-link" style="color: #292828">Powróć do profilu</a>
