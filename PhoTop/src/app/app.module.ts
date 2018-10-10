@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarUserComponent } from './navbar-user/navbar-user.component';
+import { NavbarUserToSearchComponent } from './navbar-user-to-search/navbar-user-to-search.component';
 import { SearchByDatePageComponent } from './search-by-date-page/search-by-date-page.component';
 import { AddPhotoPageComponent } from './add-photo-page/add-photo-page.component';
 import { PhotosPageComponent } from './photos-page/photos-page.component';
@@ -64,6 +65,7 @@ import { PhotoNameFilterPipe } from './photo-name-filter.pipe';
     SearchPhotoComponent,
     EditPhotoComponent,
     PhotoNameFilterPipe,
+    NavbarUserToSearchComponent,
   ],
   imports: [
     BrowserModule,
