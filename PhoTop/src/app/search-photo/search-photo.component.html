@@ -1,14 +1,18 @@
-<app-navbar-user-to-search (eventFraza)="search($event)"></app-navbar-user-to-search>
-
-
+<app-navbar-user></app-navbar-user>
 <div class="jumbotron">
   <div class="container">
     <h1 class="my-4">Szukaj według nazwy</h1>
     <form class="form-inline row form-group">
       <div class="col-sm-12 col-md-6">
         Wrowadż nazwe według której chcesz szukać
-        <div style="width: 40px"></div>
-        <input name="title" type="text" class="form-control" placeholder="Szukaj po nazwie" [(ngModel)]="searchTerm" />
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="input-group form-inline mr-auto search-div" style="margin: 5px; width: 300px;">
+            <input name="title" class="form-control" placeholder="Szukaj po nazwie" [(ngModel)]="searchTerm" type="search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn btn-dark" type="button" id="inputGroupFileAddon04">Szukaj</button>
+            </div>
+        </div>
       </div>
     </form>
 

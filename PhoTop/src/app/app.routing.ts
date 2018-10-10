@@ -16,23 +16,24 @@ import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/sear
 import { EditPhotoComponent } from './edit-photo/edit-photo.component';
 import { SearchPhotoComponent } from './search-photo/search-photo.component';
 
+import { AuthGuard } from './_guards/auth.guard';
+
 const routes: Routes = [
 
-    { path: '', redirectTo: '/strona-domowa', pathMatch: 'full' },
+    { path: '', redirectTo: '/strona-domowa', pathMatch: 'full', canActivate: [AuthGuard] },
     { path: 'logowanie', component: LoginComponent },
     { path: 'rejestracja', component: RegisterComponent },
-    { path: 'ranking', component: RankComponent },
-    { path: 'szukaj-wedlug-daty', component: SearchByDatePageComponent },
-    { path: 'dodaj-zdjecie', component: AddPhotoPageComponent },
-    { path: 'edycja-profilu', component: EditPrifileComponent },
-    { path: 'wybrane-zdjecie', component: PhotosPageComponent },
-    { path: 'szukaj-wedlug-tagu', component: SearchByTagPageComponent },
-    { path: 'szukaj-wedlug-tagu-zdjec', component: SearchByTagPhotosPageComponent },
+    { path: 'ranking', component: RankComponent, canActivate: [AuthGuard] },
+    { path: 'szukaj-wedlug-daty', component: SearchByDatePageComponent, canActivate: [AuthGuard] },
+    { path: 'dodaj-zdjecie', component: AddPhotoPageComponent, canActivate: [AuthGuard] },
+    { path: 'edycja-profilu', component: EditPrifileComponent, canActivate: [AuthGuard] },
+    { path: 'wybrane-zdjecie', component: PhotosPageComponent, canActivate: [AuthGuard] },
+    { path: 'szukaj-wedlug-tagu', component: SearchByTagPageComponent, canActivate: [AuthGuard] },
+    { path: 'szukaj-wedlug-tagu-zdjec', component: SearchByTagPhotosPageComponent, canActivate: [AuthGuard] },
     // { path: 'zmiana-h', component: ChangePasswordComponent },
-    { path: 'glowna', component: HomeComponent },
-    { path: 'strona-domowa', component: HomeUserPageComponent },
-    { path: 'edycja-zdjecia', component: EditPhotoComponent },
-    { path: 'szukaj-wedlug-nazwy', component: SearchPhotoComponent },
+    { path: 'strona-domowa', component: HomeUserPageComponent, canActivate: [AuthGuard] },
+    { path: 'edycja-zdjecia', component: EditPhotoComponent, canActivate: [AuthGuard] },
+    { path: 'szukaj-wedlug-nazwy', component: SearchPhotoComponent, canActivate: [AuthGuard] },
     { path: '**', component: PageNotFoundComponent },
 
 ];

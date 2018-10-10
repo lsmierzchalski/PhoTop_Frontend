@@ -25,5 +25,4 @@ export class SearchPhotoComponent implements OnInit {
     });
   }
 
-
 }
