@@ -1,49 +1,45 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="my-4"    >Szukaj według daty</h1>
+        <h1 class="my-4">Szukaj według daty</h1>
         <form class="form-inline row form-group">
-                <div class="col-sm-12 col-md-6">
-                    Wrowadż zakres daty według którego chcesz szukać
-                    <div style="width: 40px"></div>
+            <div class="col-sm-12 col-md-6">
+                Wrowadż zakres daty według którego chcesz szukać
+                <div style="width: 40px"></div>
+            </div>
+
+            <div class="input-group col-sm-12 col-md-6">
+                <input class="form-control " placeholder="{{placeholderDate}}" name="dp" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-secondary calendar calendar-button" style="width: 35px;"
+                        type="button"></button>
                 </div>
-                
-                <div class="input-group col-sm-12 col-md-6" >
-                    <input class="form-control " placeholder="{{placeholderDate}}" name="dp"  ngbDatepicker #d="ngbDatepicker"  >
-                    <div class="input-group-append">
-                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-secondary calendar calendar-button" style="width: 35px;" type="button"></button>
-                    </div>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Wybór zakresu</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ngb-datepicker #dp [(ngModel)]="model" name="dataPicker" (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
-                        </ngb-datepicker>
-                
-                        <ng-template #t let-date="date" let-focused="focused">
-                            <span class="custom-day"
-                                    [class.future]="isFuture(date)"
-                                    [class.focused]="focused"
-                                    [class.range]="isRange(date)"
-                                    [class.faded]="isHovered(date) || isInside(date)"
-                                    (mouseenter)="hoveredDate = date"
-                                    (mouseleave)="hoveredDate = null">
-                                {{ date.day }}
-                            </span>
-                        </ng-template>
-                    </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Wybór zakresu</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ngb-datepicker #dp [(ngModel)]="model" name="dataPicker" (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+                            </ngb-datepicker>
+
+                            <ng-template #t let-date="date" let-focused="focused">
+                                <span class="custom-day" [class.future]="isFuture(date)" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+                                    (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+                            </ng-template>
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </form>
         <hr>
         <div *ngIf="photos.length == 0">
@@ -52,7 +48,8 @@
             </div>
         </div>
         <div class="row">
-            <div *ngFor="let photo of photos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+            <div *ngFor="let photo of photos | paginate: {itemsPerPage: 9, currentPage: p}" class="col-sm-12 col-xl-4 col-md-6 portfolio-item"
+                style="margin-bottom: 30px;">
                 <div class="card h-100">
                     <a href="#">
                         <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
@@ -64,7 +61,12 @@
                         <h4 class="card-title">
                             <a>{{photo.title}}</a>
                         </h4>
-                        <h2>★ {{photo.rating}} &nbsp;<small><small>(liczba ocen: <span *ngIf="photo.number_of_ratings===null">0</span> {{photo.number_of_ratings}} )</small></small></h2>
+                        <h2>★ {{photo.rating}} &nbsp;
+                            <small>
+                                <small>(liczba ocen:
+                                    <span *ngIf="photo.number_of_ratings===null">0</span> {{photo.number_of_ratings}} )</small>
+                            </small>
+                        </h2>
                         <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Zobacz więcej</button>
                     </div>
                 </div>
@@ -73,3 +75,4 @@
 
     </div>
 </div>
+<pagination-controls (pageChange)="p =$event" previousLabel="Poprzednia" nextLabel="Następna"></pagination-controls>

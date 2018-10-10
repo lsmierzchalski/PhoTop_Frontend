@@ -20,7 +20,8 @@
         </div>
         <div style="height: 60px;"></div>
         <div class="row">
-            <div *ngFor="let photo of userPhotos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+            <div *ngFor="let photo of userPhotos | paginate: {itemsPerPage: 9, currentPage: p}" class="col-sm-12 col-xl-4 col-md-6 portfolio-item"
+                style="margin-bottom: 30px;">
                 <div class="card h-100">
                     <a href="#">
                         <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
@@ -49,3 +50,4 @@
         </div>
     </div>
 </div>
+<pagination-controls (pageChange)="p =$event" previousLabel="Poprzednia" nextLabel="Następna"></pagination-controls>

@@ -2,9 +2,10 @@ import { platformBrowser } from '@angular/platform-browser/public_api';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
@@ -35,7 +36,7 @@ import * as  Cloudinary from 'cloudinary-core';
 import { RankComponent } from './rank/rank.component';
 import { HttpService } from './_services/http.service';
 import { FileUploadModule } from 'ng2-file-upload';
-import {NgbModule, NgbRating, NgbDatepicker} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbRating, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { SearchByTagPhotosPageComponent } from './search-by-tag-photos-page/search-by-tag-photos-page.component';
 import { SearchPhotoComponent } from './search-photo/search-photo.component';
 import { EditPhotoComponent } from './edit-photo/edit-photo.component';
@@ -72,7 +73,8 @@ import { PhotoNameFilterPipe } from './photo-name-filter.pipe';
     HttpClientModule,
     NgbModule,
     FileUploadModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv'}),
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'photop', upload_preset: 'sch0n8mv' }),
+    NgxPaginationModule
   ],
   exports: [
   ],

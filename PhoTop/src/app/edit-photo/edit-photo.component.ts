@@ -43,7 +43,8 @@ export class EditPhotoComponent implements OnInit {
     const selectPhotos = JSON.parse(localStorage.getItem('selectPhoto'));
     console.log(selectPhotos);
     console.log('selectphotos: ', selectPhotos.photo_id);
-    this.httpService.editPhotoData(selectPhotos, this.photoGroup.value.title, this.photoGroup.value.description).subscribe(data => {
+    // tslint:disable-next-line:max-line-length
+    this.httpService.editPhotoData(selectPhotos.photo_id, this.photoGroup.value.title, this.photoGroup.value.description).subscribe(data => {
       this.alertService.success('Edycja powiodła się', true);
       this.router.navigate(['/strona-domowa']);
     },

@@ -1,14 +1,18 @@
 <app-navbar-user></app-navbar-user>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="my-4">Wyniki wyszukiwania <small> dla tagu </small><span class="badge badge-secondary">{{selectTag.name}}</span></h1>
+        <h1 class="my-4">Wyniki wyszukiwania
+            <small> dla tagu </small>
+            <span class="badge badge-secondary">{{selectTag.name}}</span>
+        </h1>
 
         <div *ngIf="photos.length==0" class="alert alert-secondary" role="alert">
             Brak zdjęć oznaczonych tym tagiem
         </div>
         <!-- Project One -->
         <div class="row">
-            <div *ngFor="let photo of photos;" class="col-sm-12 col-xl-4 col-md-6 portfolio-item" style="margin-bottom: 30px;">
+            <div *ngFor="let photo of photos | paginate: {itemsPerPage: 9, currentPage: p}" class="col-sm-12 col-xl-4 col-md-6 portfolio-item"
+                style="margin-bottom: 30px;">
                 <div class="card h-100">
                     <a href="#">
                         <cl-image public-id="{{photo.file_path}}" class="img-fluid" format="jpg">
@@ -21,10 +25,12 @@
                             <a>{{photo.title}}</a>
                         </h4>
                         <h2>★ {{photo.rating}} &nbsp;
-                            <small><small>(liczba ocen: 
-                                <span *ngIf="photo.number_of_ratings===null">0</span> 
-                                {{photo.number_of_ratings}} )
-                            </small></small>
+                            <small>
+                                <small>(liczba ocen:
+                                    <span *ngIf="photo.number_of_ratings===null">0</span>
+                                    {{photo.number_of_ratings}} )
+                                </small>
+                            </small>
                         </h2>
                         <button class="btn btn-dark" (click)="moreInfoAboutPhoto(photo.photo_id)">Zobacz więcej</button>
                     </div>
@@ -34,3 +40,4 @@
 
     </div>
 </div>
+<pagination-controls (pageChange)="p =$event" previousLabel="Poprzednia" nextLabel="Następna"></pagination-controls>
